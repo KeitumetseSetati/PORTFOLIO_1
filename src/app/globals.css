@@ -1,26 +1,127 @@
+
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f9f7;
+  --foreground: #10231b;
+
+  --accent: #008a52;
+  --accent-hover: #006f42;
+  --accent-foreground: #ffffff;
+
+  --cyan: #007f91;
+  --violet: #7042bd;
+
+  --surface: #ffffff;
+  --surface-secondary: #eaf2ed;
+  --muted: #53645b;
+  --border: #d4e4d9;
+
+  --glow: rgba(0, 138, 82, 0.12);
+}
+
+.dark {
+  --background: #050807;
+  --foreground: #f4f7f5;
+
+  --accent: #00ff85;
+  --accent-hover: #00d973;
+  --accent-foreground: #050807;
+
+  --cyan: #00e5ff;
+  --violet: #9b5cff;
+
+  --surface: #0b1511;
+  --surface-secondary: #17221f;
+  --muted: #a3b0aa;
+  --border: #244237;
+
+  --glow: rgba(0, 255, 133, 0.22);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Reusable futuristic styling */
+
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+}
+
+.neon-border {
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 18px var(--glow);
+}
+
+.neon-text {
+  color: var(--accent);
+  text-shadow: 0 0 16px var(--glow);
+}
+
+.glow-button {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+.glow-button:hover {
+  transform: translateY(-2px);
+  background: var(--accent-hover);
+  box-shadow: 0 0 24px var(--glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
